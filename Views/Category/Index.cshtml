@@ -1,0 +1,13 @@
+@model List<portofolio_aspnet_core.Models.Category>
+
+<h1 class="display-4 text-center">Category Page</h1>
+
+<ul>
+    @if (Model is not null)
+    {
+        @foreach (var c in Model) 
+        {
+            <li>@c.Name</li>
+        }
+    }
+</ul>

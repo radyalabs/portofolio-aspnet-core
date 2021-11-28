@@ -1,35 +1,14 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using portofolio_aspnet_core.Models;
-using portofolio_aspnet_core.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace portofolio_aspnet_core.Controllers;
 
-public class HomeController : Controller
+public class HomeController : AdminBaseController
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly ApplicationDbContext _db;
-
-    public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
-    {
-        _logger = logger;
-        _db = db;
-    }
-
+    [Route(BaseUrl + "/")]
     public IActionResult Index()
     {
+        ViewData["Title"] = "Home";
+        
         return View();
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

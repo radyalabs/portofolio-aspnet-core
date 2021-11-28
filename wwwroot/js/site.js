@@ -1,4 +1,45 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function toggleSidenav(open) {
+    if (open == "true") {
+        $("#sidenav").attr("data-open", "false");
+        $("#sidenav").addClass("sidenav-off");
+        
+        $("#sidenav-ul").addClass("nav-flush text-center");
+        $(".nav-link").addClass("py-3 border-bottom");
+        $(".nav-text").addClass("d-none");
 
-// Write your JavaScript code.
+        $("main").addClass("off");
+    } else {
+        $("#sidenav").attr("data-open", "true");
+        $("#sidenav").removeClass("sidenav-off");
+
+        $("#sidenav-ul").removeClass("nav-flush text-center");
+        $(".nav-link").removeClass("py-3 border-bottom");
+        $(".nav-text").removeClass("d-none");
+
+        $("main").removeClass("off");
+    }
+}
+
+$(document).ready(function() {
+    var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+    toggleSidenav(width <= 768 ? "true" : "false")
+
+    $(window).resize(function() {
+        var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+        toggleSidenav(width <= 768 ? "true" : "false")            
+    });
+
+    $("#sidenav-button").on("click", function() {
+        toggleSidenav($("#sidenav").attr("data-open"));
+    });
+
+    if (window.location.pathname.startsWith("/admin/categories")) {
+        $("#nav-category").addClass("active");
+    } else if (window.location.pathname.startsWith("/admin/members")) {
+        $("#nav-member").addClass("active");
+    } else if (window.location.pathname.startsWith("/admin/projects")) {
+        $("#nav-project").addClass("active");
+    } else {
+        $("#nav-home").addClass("active");
+    }
+});
