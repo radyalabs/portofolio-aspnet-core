@@ -42,4 +42,12 @@ $(document).ready(function() {
     } else {
         $("#nav-home").addClass("active");
     }
+
+    $(".delete-form").on("submit", function(e) {
+        e.preventDefault();
+
+        if (window.confirm("Are you sure you want to delete this data?")) {
+            e.target.submit();
+        }
+    });
 });

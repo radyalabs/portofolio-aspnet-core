@@ -1,0 +1,14 @@
+@using portofolio_aspnet_core.Models.Utilities;
+
+@if (ViewData["Breadcrumbs"] != null)
+{
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            @foreach (var b in ViewData["Breadcrumbs"] as IEnumerable<Breadcrumb> ?? Enumerable.Empty<Breadcrumb>())
+            {
+                <li class="breadcrumb-item"><a href="@b.Url">@b.Title</a></li>
+            }
+            <li class="breadcrumb-item active" aria-current="page">@ViewData["ActiveBreadcrumb"]</li>
+        </ol>
+    </nav>
+}
