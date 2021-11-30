@@ -28,6 +28,7 @@ bin/
 obj/
 TestResults/
 notes/
+wwwroot/storage/
 
 ###################
 # Web publish log #

@@ -18,3 +18,8 @@ public class Member
     public string? Description { get; set; }
     public virtual ICollection<Project>? Projects { get; set; }
 }
+
+public class MemberInput : Member
+{
+    public IFormFile? Image { get; set; }
+}

@@ -1,13 +1,75 @@
 @model List<portofolio_aspnet_core.Models.Member>
 
-<h1 class="display-4 text-center">Member Page</h1>
+<div class="d-flex">
+    <a href='@Url.Action("Create", "Member")' class="btn btn-primary my-3 ms-auto">
+        <i class="bi bi-plus-square me-1"></i>
+        CREATE MEMBER
+    </a>
+</div>
 
-<ul>
-    @if (Model is not null)
-    {
-        @foreach (var c in Model) 
-        {
-            <li>@c.Name</li>
-        }
-    }
-</ul>
+@if (Model is not null)
+{
+    <table id="table-members" class="table table-hover table-responsive">
+        <thead class="table-light">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            @foreach (var c in Model.Select((value, i) => (value, i))) 
+            {
+                <tr>
+                    <td>@(c.i + 1)</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(c.value.ProfilePicture))
+                        {
+                            <img src="@c.value.ProfilePicture" width="32" height="32" />
+                        }
+                        @c.value.Name
+                    </td>
+                    <td>@c.value.Description</td>
+                    <td class="d-flex gap-2">
+                        <a href='@Url.Action("Edit", "Member", new { id = @c.value.Id })' class="btn btn-primary">
+                            <i class="bi bi-pencil-square me-1"></i>
+                            EDIT
+                        </a>
+                        <form method="post" action='@Url.Action("Delete", "Member", new { id = @c.value.Id })' class="delete-form">
+                            <button class="btn btn-danger" type="submit">
+                                <i class="bi bi-trash me-1"></i>
+                                DELETE
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@section Scripts {
+<script>
+    $(document).ready(function() {
+        $("#table-members").DataTable({
+            columns: [
+                {
+                    width: "5%"
+                },
+                {
+
+                },
+                {
+
+                },
+                {
+                    orderable: false,
+                    width: "15%"
+                }
+            ]
+        });
+    });
+</script>
+}
