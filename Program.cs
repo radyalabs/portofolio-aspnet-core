@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using portofolio_aspnet_core.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,12 @@ builder.Services.AddDbContext<portofolio_aspnet_core.Data.ApplicationDbContext>(
 );
 builder.Services.AddMvc().AddNewtonsoftJson();
 builder.Services.AddTransient<FileController>();
+
+JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+{
+    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+    Formatting = Formatting.Indented
+};
 
 var app = builder.Build();
 

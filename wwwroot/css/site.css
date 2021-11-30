@@ -43,6 +43,15 @@ main.off {
   }
 }
 
+.select2 {
+  width: 100% !important;
+}
+
+.file-preview:hover {
+  opacity: 75%;
+  cursor: pointer;
+}
+
 /* Common */
 .cursor-pointer {
   cursor: pointer;

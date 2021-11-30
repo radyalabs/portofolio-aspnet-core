@@ -9,45 +9,47 @@
 
 @if (Model is not null)
 {
-    <table id="table-members" class="table table-hover table-responsive">
-        <thead class="table-light">
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th></th>
-            </tr>
-        </thead>
-        
-        <tbody>
-            @foreach (var c in Model.Select((value, i) => (value, i))) 
-            {
+    <div class="table-responsive">
+        <table id="table-members" class="table table-hover">
+            <thead class="table-light">
                 <tr>
-                    <td>@(c.i + 1)</td>
-                    <td>
-                        @if (!string.IsNullOrEmpty(c.value.ProfilePicture))
-                        {
-                            <img src="@c.value.ProfilePicture" width="32" height="32" />
-                        }
-                        @c.value.Name
-                    </td>
-                    <td>@c.value.Description</td>
-                    <td class="d-flex gap-2">
-                        <a href='@Url.Action("Edit", "Member", new { id = @c.value.Id })' class="btn btn-primary">
-                            <i class="bi bi-pencil-square me-1"></i>
-                            EDIT
-                        </a>
-                        <form method="post" action='@Url.Action("Delete", "Member", new { id = @c.value.Id })' class="delete-form">
-                            <button class="btn btn-danger" type="submit">
-                                <i class="bi bi-trash me-1"></i>
-                                DELETE
-                            </button>
-                        </form>
-                    </td>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            
+            <tbody>
+                @foreach (var c in Model.Select((value, i) => (value, i))) 
+                {
+                    <tr>
+                        <td>@(c.i + 1)</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(c.value.ProfilePicture))
+                            {
+                                <img src="@c.value.ProfilePicture" width="32" height="32" />
+                            }
+                            @c.value.Name
+                        </td>
+                        <td>@c.value.Description</td>
+                        <td class="d-flex gap-2">
+                            <a href='@Url.Action("Edit", "Member", new { id = @c.value.Id })' class="btn btn-primary">
+                                <i class="bi bi-pencil-square me-1"></i>
+                                EDIT
+                            </a>
+                            <form method="post" action='@Url.Action("Delete", "Member", new { id = @c.value.Id })' class="delete-form">
+                                <button class="btn btn-danger" type="submit">
+                                    <i class="bi bi-trash me-1"></i>
+                                    DELETE
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 
 @section Scripts {

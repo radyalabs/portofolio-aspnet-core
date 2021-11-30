@@ -22,3 +22,10 @@ public class Project
     public virtual ICollection<Member>? Members { get; set; }
     public virtual ICollection<Category>? Categories { get; set; }
 }
+
+public class ProjectInput : Project
+{
+    public List<IFormFile>? Images { get; set; }
+    public List<string>? MemberIds { get; set; }
+    public List<string>? CategoryIds { get; set; }
+}

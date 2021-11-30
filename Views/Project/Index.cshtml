@@ -1,13 +1,97 @@
 @model List<portofolio_aspnet_core.Models.Project>
 
-<h1 class="display-4 text-center">Project Page</h1>
+<div class="d-flex">
+    <a href='@Url.Action("Create", "Project")' class="btn btn-primary my-3 ms-auto">
+        <i class="bi bi-plus-square me-1"></i>
+        CREATE PROJECT
+    </a>
+</div>
 
-<ul>
-    @if (Model is not null)
-    {
-        @foreach (var c in Model) 
-        {
-            <li>@c.Name</li>
-        }
-    }
-</ul>
+@if (Model is not null)
+{
+    <div class="table-responsive">
+        <table id="table-categories" class="table table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Url</th>
+                    <th>Categories</th>
+                    <th>Members</th>
+                    <th></th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                @foreach (var c in Model.Select((value, i) => (value, i))) 
+                {
+                    <tr>
+                        <td>@(c.i + 1)</td>
+                        <td>@c.value.Name</td>
+                        <td><a href="@c.value.Url" target="_blank">@c.value.Url</a></td>
+                        <td>
+                            @if (c.value.Categories != null)
+                            {
+                                @foreach(var category in c.value.Categories.Select((value, i) => (value, i)))
+                                {
+                                    @(category.value.Name + (category.i == (c.value.Categories.Count - 1) ? "" : ", "))
+                                }
+                            }
+                        </td>
+                        <td>
+                            @if (c.value.Members != null)
+                            {
+                                @foreach(var member in c.value.Members.Select((value, i) => (value, i)))
+                                {
+                                    @(member.value.Name + (member.i == (c.value.Members.Count - 1) ? "" : ", "))
+                                }
+                            }
+                        </td>
+                        <td class="d-flex gap-2">
+                            <a href='@Url.Action("Edit", "Project", new { id = @c.value.Id })' class="btn btn-primary">
+                                <i class="bi bi-pencil-square me-1"></i>
+                                EDIT
+                            </a>
+                            <form method="post" action='@Url.Action("Delete", "Project", new { id = @c.value.Id })' class="delete-form">
+                                <button class="btn btn-danger" type="submit">
+                                    <i class="bi bi-trash me-1"></i>
+                                    DELETE
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@section Scripts {
+<script>
+    $(document).ready(function() {
+        $("#table-categories").DataTable({
+            columns: [
+                {
+                    width: "5%"
+                },
+                {
+
+                },
+                {
+
+                },
+                {
+
+                },
+                {
+
+                },
+                {
+                    orderable: false,
+                    width: "15%"
+                }
+            ]
+        });
+    });
+</script>
+}
