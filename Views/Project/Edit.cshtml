@@ -126,7 +126,7 @@
             var formData = new FormData();
             formData.append("name", $("#name").val());
             formData.append("description", $("#description").val());
-            formData.append("content", $("#content").val());
+            formData.append("content", $("#content").val().replace(/"/g, "'"));
             formData.append("url", $("#url").val());
             formData.append("memberIds", $("#members").val());
             formData.append("categoryIds", $("#categories").val());

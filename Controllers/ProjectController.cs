@@ -323,4 +323,36 @@ public class ProjectController : AdminBaseController
             return Json(e);
         }
     }
+
+    [Route(BaseUrl + "/projects/{id}/detail")]
+    public IActionResult Detail(string id)
+    {
+        if (id == null || (!Db?.Projects?.Any(x => x.Id == id) ?? false)) 
+        {
+            return Content("Project not found");
+        }
+
+        var project = Db?.Projects?
+            .Include(x => x.Members)
+            .Include(x => x.Categories)
+            .Include(x => x.ProjectImages)
+            .FirstOrDefault(x => x.Id == id);
+        if (project == null)
+        {
+            return Content("Project not found");
+        }
+        
+        ViewData["Title"] = $"{project.Name} - Project";
+        ViewData["ActiveBreadcrumb"] = "Detail Project";
+        ViewData["Breadcrumbs"] = new List<Breadcrumb>
+        {
+            new Breadcrumb
+            {
+                Title = "Project",
+                Url = Url.Action("Index", "Project") ?? "#"
+            }
+        };
+        
+        return View(project); 
+    }
 }

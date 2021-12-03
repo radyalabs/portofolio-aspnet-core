@@ -1,0 +1,126 @@
+@using portofolio_aspnet_core.Models;
+@model Project;
+
+@if (Model != null)
+{
+    <div class="d-flex">
+        <a href='@Url.Action("Edit", "Project", new { id = @Model.Id })' class="btn btn-primary my-3 ms-auto">
+            <i class="bi bi-plus-square me-1"></i>
+            EDIT PROJECT
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-7">
+            <h1>@Model.Name</h1>   
+            <p>
+                @if (Model.Categories != null)
+                {
+                    @foreach(var category in Model.Categories.Select((value, i) => (value, i)))
+                    {
+                        @(category.value.Name + (category.i == (Model.Categories.Count - 1) ? "" : ", "))
+                    }
+                }
+            </p>
+            <p>@Model.Description</p>
+            <div id="main-slider" class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        @foreach (var image in Model.ProjectImages ?? new List<ProjectImage>())
+                        {
+                            <li class="splide__slide">
+                                <img src="@image.Url" />
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div id="thumbnail-slider" class="splide">
+                <div class="splide__track splide__track__thumbnails">
+                    <ul class="splide__list">
+                        @foreach (var image in Model.ProjectImages ?? new List<ProjectImage>())
+                        {
+                            <li class="splide__slide">
+                                <img src="@image.Url" />
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div style="position: sticky;top: 0;">
+                <h4>PROJECT DETAILS</h4>
+                <div id="content"></div>
+                <a href="@Model.Url" target="_blank" class="btn btn-primary">VISIT WEBSITE</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3 m-0" style="position: relative">
+        <div class="col-md-12" style="padding: 50px;background-color: #eceff2;">
+            <div id="member-slider" class="member-splide mx-auto" style="width: 400px;">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        @if (Model.Members != null)
+                        {
+                            @foreach (var member in Model.Members ?? new List<Member>())
+                            {
+                                <li class="splide__slide d-flex">
+                                    <div class="mx-auto">
+                                        <img src="@member.ProfilePicture" class="mb-3" style="border-radius: 50%;width: 128px;height: 128px; object-fit: cover;" />
+                                        <div>
+                                            <span class="h6">@member.Description</span>
+                                            <p class="text-center">-@member.Name</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+<script>
+    $(document).ready(function() {
+        var splide = new Splide('#main-slider', {
+            type      : 'fade',
+            rewind    : true,
+            pagination: false,
+            arrows    : false,
+        });
+        var thumbnail = new Splide('#thumbnail-slider', {
+            fixedWidth  : 100,
+            fixedHeight : 60,
+            gap         : 10,
+            rewind      : true,
+            pagination  : false,
+            cover       : true,
+            isNavigation: true,
+            breakpoints : {
+            600: {
+                fixedWidth : 60,
+                fixedHeight: 44,
+            },
+            },
+        });
+        splide.sync(thumbnail);
+        splide.mount();
+        thumbnail.mount();
+
+        var content = `@Html.Raw(Model != null ? Model.Content : "")`.replace(/(\r\n|\n|\r)/gm, "");
+        $("#content").html(content);
+
+        new Splide('#member-slider', {
+            @* type        : 'loop', *@
+            rewind      : true,
+            arrows      : false,
+            perPage     : 1
+        }).mount();
+    });
+</script>
+}
