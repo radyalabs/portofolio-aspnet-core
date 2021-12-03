@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using portofolio_aspnet_core.Controllers;
 
@@ -11,6 +10,11 @@ builder.Services.AddDbContext<portofolio_aspnet_core.Data.ApplicationDbContext>(
 );
 builder.Services.AddMvc().AddNewtonsoftJson();
 builder.Services.AddTransient<FileController>();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
+    options.LoginPath = "/admin/login";
+    options.LogoutPath = "/admin/logout";
+    options.ReturnUrlParameter = "";
+});
 
 JsonConvert.DefaultSettings = () => new JsonSerializerSettings
 {
@@ -33,6 +37,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

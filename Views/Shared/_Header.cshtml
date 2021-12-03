@@ -11,10 +11,16 @@
         <div class="d-flex align-items-center justify-content-end">
             <div class="flex-shrink-0 dropdown">
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <strong>Username</strong>
+                    <strong>@( User?.Identity?.Name ?? "Username" )</strong>
                 </a>
                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    <li>
+                        <form method="post" action='@Url.Action("Logout", "Authentication")'>
+                            <button class="dropdown-item" type="submit">
+                                Sign out
+                            </button>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>

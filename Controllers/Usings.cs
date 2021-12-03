@@ -1,0 +1,11 @@
+global using Microsoft.AspNetCore.Authentication;
+global using Microsoft.AspNetCore.Authentication.Cookies;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore;
+global using portofolio_aspnet_core.Data;
+global using portofolio_aspnet_core.Models;
+global using portofolio_aspnet_core.Models.Utilities;
+global using System.ComponentModel.DataAnnotations;
+global using System.Diagnostics;
+global using System.Security.Claims;

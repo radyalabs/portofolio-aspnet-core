@@ -1,10 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
-using portofolio_aspnet_core.Models;
-using portofolio_aspnet_core.Models.Utilities;
-using Microsoft.EntityFrameworkCore;
-
 namespace portofolio_aspnet_core.Controllers;
 
+[Authorize]
 public class ProjectController : AdminBaseController
 {
     [Route(BaseUrl + "/projects")]

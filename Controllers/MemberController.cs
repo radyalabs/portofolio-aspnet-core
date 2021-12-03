@@ -1,9 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
-using portofolio_aspnet_core.Models;
-using portofolio_aspnet_core.Models.Utilities;
-
 namespace portofolio_aspnet_core.Controllers;
 
+[Authorize]
 public class MemberController : AdminBaseController
 {
     [Route(BaseUrl + "/members")]

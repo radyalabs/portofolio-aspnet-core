@@ -1,8 +1,3 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using portofolio_aspnet_core.Models;
-using portofolio_aspnet_core.Data;
-
 namespace portofolio_aspnet_core.Controllers;
 
 public class BaseController : Controller
