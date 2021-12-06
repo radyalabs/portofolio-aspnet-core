@@ -1,5 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using portofolio_aspnet_core.Models;
+using portofolio_aspnet_core.Seeders;
 
 namespace portofolio_aspnet_core.Data;
 
@@ -10,6 +9,7 @@ public class ApplicationDbContext : DbContext
         
     }
     public DbSet<User>? Users { get; set; }
+    public DbSet<ResetPassword>? ResetPasswords { get; set; }
     public DbSet<Member>? Members { get; set; }
     public DbSet<Category>? Categories { get; set; }
     public DbSet<Project>? Projects { get; set; }
@@ -22,5 +22,8 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Project>().HasMany(p => p.ProjectImages).WithOne(pi => pi.Project);
         modelBuilder.Entity<Project>().HasMany(p => p.Members).WithMany(m => m.Projects).UsingEntity<ProjectMember>();
         modelBuilder.Entity<Project>().HasMany(p => p.Categories).WithMany(c => c.Projects).UsingEntity<ProjectCategory>();
+        modelBuilder.Entity<User>().HasMany(u => u.ResetPasswords).WithOne(rp => rp.User);
+    
+        modelBuilder.Seed();
     }
 }

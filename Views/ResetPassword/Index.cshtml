@@ -1,0 +1,30 @@
+@{
+    Layout = "_AuthenticationLayout";
+}
+
+<section class="vh-100 bg-light">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <form action='@Url.Action("Reset", "ResetPassword")' method="post" class="card-body p-5 d-flex flex-column">
+
+            <h3 class="mb-5 text-center">Reset Password</h3>
+
+            <div class="mb-4">
+              <label class="form-label" for="email">Email</label>
+              <input type="email" id="email" name="email" class="form-control" required/>
+            </div>
+
+            <a href='@Url.Action("ResetPasswordView", "ResetPassword")'>Login</a>
+
+            <button class="btn btn-primary ms-auto" type="submit">
+                <i class="bi bi-send me-1"></i>
+                Reset Password
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

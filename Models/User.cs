@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace portofolio_aspnet_core.Models;
@@ -15,6 +14,10 @@ public class User
     [Required]
     [Column("password")]
     public string Password { get; set; } = string.Empty;
+    [Required]
+    [Column("email")]
+    public string Email { get; set; } = string.Empty;
+    public virtual ICollection<ResetPassword>? ResetPasswords { get; set; }
 }
 
 public class UserLogin

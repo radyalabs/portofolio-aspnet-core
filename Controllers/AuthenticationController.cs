@@ -43,7 +43,8 @@ public class AuthenticationController : AdminBaseController
     {
         var claims = new[]
         {
-            new Claim(ClaimTypes.Name, user.Username)
+            new Claim(ClaimTypes.Name, user.Username),
+            new Claim(ClaimTypes.NameIdentifier, user.Id)
         };
 
         var claimsIdentity = new ClaimsIdentity(

@@ -16,6 +16,9 @@
                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
                     <li>
                         <form method="post" action='@Url.Action("Logout", "Authentication")'>
+                            <a href='@Url.Action("ChangePasswordView", "ResetPassword")' class="dropdown-item" type="submit">
+                                Change Password
+                            </a>
                             <button class="dropdown-item" type="submit">
                                 Sign out
                             </button>
