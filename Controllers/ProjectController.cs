@@ -136,8 +136,10 @@ public class ProjectController : AdminBaseController
             .Include(x => x.Categories)
             .Include(x => x.ProjectImages)
             .FirstOrDefault(x => x.Id == id);
+        if (project != null)
+            project.Content = project.Content?.Replace("\"", "'");
         ViewBag.Project = Newtonsoft.Json.JsonConvert.SerializeObject(project);
-        return View(); 
+        return View();
     }
 
     [Route(BaseUrl + "/projects/{id}")]

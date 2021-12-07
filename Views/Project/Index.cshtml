@@ -47,21 +47,23 @@
                                 }
                             }
                         </td>
-                        <td class="d-flex gap-2">
-                            <a href='@Url.Action("Detail", "Project", new { id = @c.value.Id })' class="btn btn-secondary">
-                                <i class="bi bi-info-square me-1"></i>
-                                DETAIL
-                            </a>
-                            <a href='@Url.Action("Edit", "Project", new { id = @c.value.Id })' class="btn btn-primary">
-                                <i class="bi bi-pencil-square me-1"></i>
-                                EDIT
-                            </a>
-                            <form method="post" action='@Url.Action("Delete", "Project", new { id = @c.value.Id })' class="delete-form">
-                                <button class="btn btn-danger" type="submit">
-                                    <i class="bi bi-trash me-1"></i>
-                                    DELETE
-                                </button>
-                            </form>
+                        <td>
+                            <div class="d-flex gap-2">
+                                <a href='@Url.Action("Detail", "Project", new { id = @c.value.Id })' class="btn btn-secondary">
+                                    <i class="bi bi-info-square me-1"></i>
+                                    DETAIL
+                                </a>
+                                <a href='@Url.Action("Edit", "Project", new { id = @c.value.Id })' class="btn btn-primary">
+                                    <i class="bi bi-pencil-square me-1"></i>
+                                    EDIT
+                                </a>
+                                <form method="post" action='@Url.Action("Delete", "Project", new { id = @c.value.Id })' class="delete-form">
+                                    <button class="btn btn-danger" type="submit">
+                                        <i class="bi bi-trash me-1"></i>
+                                        DELETE
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 }

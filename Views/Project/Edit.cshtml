@@ -54,6 +54,7 @@
 @section Scripts {
 <script>
     $(document).ready(function() {
+        console.log(`@Html.Raw(ViewBag.Project)`.replace(/(\r\n|\n|\r)/gm, ""))
         var project = JSON.parse(`@Html.Raw(ViewBag.Project)`.replace(/(\r\n|\n|\r)/gm, ""));
         
         $("#content").trumbowyg();

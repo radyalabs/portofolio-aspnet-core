@@ -67,10 +67,10 @@
                             @foreach (var member in Model.Members ?? new List<Member>())
                             {
                                 <li class="splide__slide d-flex">
-                                    <div class="mx-auto">
+                                    <div class="mx-auto text-center">
                                         <img src="@member.ProfilePicture" class="mb-3" style="border-radius: 50%;width: 128px;height: 128px; object-fit: cover;" />
                                         <div>
-                                            <span class="h6">@member.Description</span>
+                                            <span class="h6">@(member.Description?.Substring(0, 231) + "..." ?? "-")</span>
                                             <p class="text-center">-@member.Name</p>
                                         </div>
                                     </div>

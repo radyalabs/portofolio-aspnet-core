@@ -17,6 +17,7 @@ html {
 main {
   height: 100%;
   margin-left: 240px;
+  margin-top: 67.64px;
   padding: 20px;
   transition: 0.5s;
 }
@@ -29,7 +30,7 @@ main.off {
   max-width: 240px;
   height: 100%;
   position: fixed;
-  top: 68.125px;
+  top: 59px;
   left: 0;
   overflow-x: hidden;
   transition: 0.5s;
@@ -42,6 +43,15 @@ main.off {
   .sidenav {
     top: 69px;
   }
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .select2 {

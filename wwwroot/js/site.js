@@ -20,13 +20,23 @@
     }
 }
 
+function setTextareaHeight(e) {
+    console.log(e.scrollHeight);
+    e.style.height = "5px";
+    e.style.height = e.scrollHeight + "px";
+}
+
 $(document).ready(function() {
     var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
     toggleSidenav(width <= 768 ? "true" : "false")
 
     $(window).resize(function() {
         var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-        toggleSidenav(width <= 768 ? "true" : "false")            
+        toggleSidenav(width <= 768 ? "true" : "false");
+        
+        for (var e of $("textarea")) {
+            setTextareaHeight(e);
+        }
     });
 
     $("#sidenav-button").on("click", function() {
@@ -49,5 +59,12 @@ $(document).ready(function() {
         if (window.confirm("Are you sure you want to delete this data?")) {
             e.target.submit();
         }
+    });
+
+    for (var e of $("textarea")) {
+        setTextareaHeight(e)
+    }
+    $("textarea").on("input", function(e) {
+        setTextareaHeight(e.target);
     });
 });
