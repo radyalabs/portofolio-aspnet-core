@@ -54,7 +54,6 @@
 @section Scripts {
 <script>
     $(document).ready(function() {
-        console.log(`@Html.Raw(ViewBag.Project)`.replace(/(\r\n|\n|\r)/gm, ""))
         var project = JSON.parse(`@Html.Raw(ViewBag.Project)`.replace(/(\r\n|\n|\r)/gm, ""));
         
         $("#content").trumbowyg();
@@ -77,6 +76,8 @@
         $("#categories").val(project.Categories.map(function(c) {
             return c.Id
         })).trigger("change");
+
+        setTextareaHeight(document.getElementById("description"));
 
         var images = [];
         project.ProjectImages.map(async function(image) {

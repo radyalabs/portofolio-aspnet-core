@@ -11,7 +11,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-6">
             <h1>@Model.Name</h1>   
             <p>
                 @if (Model.Categories != null)
@@ -22,7 +22,7 @@
                     }
                 }
             </p>
-            <p>@Model.Description</p>
+            <p style="white-space: pre-line">@Model.Description</p>
             <div id="main-slider" class="splide">
                 <div class="splide__track">
                     <ul class="splide__list">
@@ -48,10 +48,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5">
-            <div style="position: sticky;top: 0;">
+        <div class="col-md-6">
+            <div class="sticky-details">
                 <h4>PROJECT DETAILS</h4>
-                <div id="content"></div>
+                <div id="content" style="word-wrap: break-word;"></div>
                 <a href="@Model.Url" target="_blank" class="btn btn-primary">VISIT WEBSITE</a>
             </div>
         </div>

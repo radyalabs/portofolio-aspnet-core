@@ -1,0 +1,139 @@
+@{
+    Layout = "_ClientLayout";
+}
+@model List<portofolio_aspnet_core.Models.Project>;
+
+<section class="section site-portfolio">
+    <div class="container">
+        <div class="row mb-5 align-items-center">
+            <div class="col-md-12 col-lg-6 mb-4 mb-lg-0 aos-init aos-animate" data-aos="fade-up">
+                <h2>Hey, We are Radya Labs Technology</h2>
+                <p class="mb-0">Digital Transformation Partner</p>
+            </div>
+            <div class="col-md-12 col-lg-6 text-start text-lg-end aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                <div id="filters" class="filters">
+                    <a href="#" data-filter="*" class="active">All</a>
+                    @if (ViewBag.Categories != null)
+                    {
+                        @foreach (var c in ViewBag.Categories ?? new List<portofolio_aspnet_core.Models.Category>())
+                        {
+                            <a href="#" data-filter=".@c.Id">@c.Name</a>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div id="portfolio-grid" class="row no-gutter aos-init aos-animate" data-aos="fade-up" data-aos-delay="100" style="position: relative; height: 2160px;">
+            @if (Model != null)
+            {
+                @foreach (var p in Model)
+                {
+                    <div class="item col-sm-6 col-md-4 col-lg-4 mb-4" id="@p.Id">
+                        <a href='@Url.Action("Detail", "Client", new { id = p.Id })' class="item-wrap fancybox">
+                            <div class="work-info">
+                                <h3>@p.Name</h3>
+                                @if (p.Categories != null)
+                                {
+                                    <span>
+                                        @foreach(var c in @p.Categories.Select((value, i) => (value, i)))
+                                        {
+                                            @(c.value.Name + (c.i == (p.Categories.Count - 1) ? "" : ", "))
+                                        }
+                                    </span>
+                                    <span id="item-categories-@p.Id" class="d-none">
+                                        @foreach(var c in @p.Categories.Select((value, i) => (value, i)))
+                                        {
+                                            @(c.value.Id + " ")
+                                        }
+                                    </span>
+                                }
+                            </div>
+                            @if (p.ProjectImages != null && p.ProjectImages.Count > 0)
+                            {
+                                <img class="img-fluid" src="@p.ProjectImages.FirstOrDefault()?.Url">
+                            }
+                            else
+                            {
+                                <img class="img-fluid" src="~/images/default-project.webp">
+                            }
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section services">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-4">
+            <div class="col-5">
+                <h3 class="h3 heading">Our Services</h3>
+                <p>Radya Labs has mission to help enterprises in their digital transformation initiatives. Radya Labs offers professional technology services, from strategy to implementation. Our solutions will help organizations transform their business, increase efficiency, and reach their customers.            </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                <i class="bi bi-card-checklist"></i>
+                <h4 class="h4 mb-2">Application Development</h4>
+                <p>We provide application development in web and mobile platform, with capability in frontend and backend development, ranging from business productivity, customer digital experiences, to field mobile solutions.</p>
+                <ul class="list-unstyled list-line">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                </ul>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                <i class="bi bi-binoculars"></i>
+                <h4 class="h4 mb-2">Chatbot Development</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit explicabo inventore.</p>
+                <ul class="list-unstyled list-line">
+                <li>Lorem ipsum dolor sit amet consectetur adipisicing</li>
+                <li>Non pariatur nisi</li>
+                <li>Magnam soluta quod</li>
+                <li>Lorem ipsum dolor</li>
+                <li>Cumque quae aliquam</li>
+                </ul>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                <i class="bi bi-brightness-high"></i>
+                <h4 class="h4 mb-2">Managed Services</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit explicabo inventore.</p>
+                <ul class="list-unstyled list-line">
+                <li>Lorem ipsum dolor sit amet consectetur adipisicing</li>
+                <li>Non pariatur nisi</li>
+                <li>Magnam soluta quod</li>
+                <li>Lorem ipsum dolor</li>
+                <li>Cumque quae aliquam</li>
+                </ul>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                <i class="bi bi-calendar4-week"></i>
+                <h4 class="h4 mb-2">Devops with Azure</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit explicabo inventore.</p>
+                <ul class="list-unstyled list-line">
+                <li>Lorem ipsum dolor sit amet consectetur adipisicing</li>
+                <li>Non pariatur nisi</li>
+                <li>Magnam soluta quod</li>
+                <li>Lorem ipsum dolor</li>
+                <li>Cumque quae aliquam</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+<script>
+    $(document).ready(function() {
+        for (var e of $(".item")) {
+            var id = $(e).attr("id");
+            var categories = $(`#item-categories-${id}`).text();
+            $(`#${id}`).addClass(categories);
+        }
+    });
+</script>
+}
